@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/Peta Potensi Pendapatan Daerah.html" }
+  ]
+}
