@@ -1,0 +1,1924 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Peta Potensi Pendapatan Daerah · Kota Denpasar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <!-- Leaflet.js CDN (Free & Open Source) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+  :root {
+    --bg:#F3F6F8;--surface:#FFFFFF;--surface2:#F4F6F8;--line:#DCE3E8;--line2:#EEF2F4;
+    --ink:#14212B;--muted:#4F6170;--muted2:#8C9AA5;
+    --nav:#0F2A3D;--nav2:#1B3A52;--nav-ink:#DCE7EE;--nav-muted:#A9BDCB;--nav-active:#17806F;
+    --teal:#0B7A6E;--teal-soft:#DDF1EE;--teal-ink:#075A51;
+    --orange:#D2601A;--orange-soft:#FDEBDD;--orange-ink:#9A3F0B;
+    --blue:#2563B8;--blue-soft:#E1ECFA;--blue-ink:#1F4F8F;
+    --purple:#6B44B0;--purple-soft:#EEE7F8;--purple-ink:#4F2F8A;
+    --grey-soft:#E9EEF1;--grey-ink:#33475A;
+    --map-bg:#EEF2EF;--map-block:#E2E7E4;--road:#FFFFFF;--water:#A8CBE0;--park:#CFE3CC;
+    --heat1:#FDF3EA;--heat2:#F9E3CF;--heat3:#F5D6BB;--heat4:#F2C9A6;
+    --sur2:#A9C6EE;--sur1:#D6E4F7;--def1:#FBE1CC;--def2:#F4BE92;
+    --shadow:0 1px 3px rgba(15,42,61,.16);
+    --font:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme:dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#0D1820;--surface:#15232E;--surface2:#1B2C38;--line:#2A3D4B;--line2:#20313D;
+      --ink:#E6EEF3;--muted:#9FB2C0;--muted2:#6E8494;
+      --nav:#081620;--nav2:#14283A;--nav-ink:#D2E0EA;--nav-muted:#8FA6B6;--nav-active:#167565;
+      --teal:#3FB5A3;--teal-soft:#123A36;--teal-ink:#86DFD1;
+      --orange:#F08A4B;--orange-soft:#3D2414;--orange-ink:#F6B58A;
+      --blue:#6FA3E8;--blue-soft:#16283F;--blue-ink:#A9C8F2;
+      --purple:#A98BE0;--purple-soft:#2A2040;--purple-ink:#CDB9F2;
+      --grey-soft:#22323E;--grey-ink:#B8C8D4;
+      --map-bg:#18252E;--map-block:#22323C;--road:#34495A;--water:#2B4F66;--park:#22402E;
+      --heat1:#2A2520;--heat2:#3A2B1E;--heat3:#4C3220;--heat4:#603A1F;
+      --sur2:#2E5689;--sur1:#1E3654;--def1:#4A2E1A;--def2:#6E3F1C;
+      --shadow:0 1px 3px rgba(0,0,0,.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0D1820;--surface:#15232E;--surface2:#1B2C38;--line:#2A3D4B;--line2:#20313D;
+    --ink:#E6EEF3;--muted:#9FB2C0;--muted2:#6E8494;
+    --nav:#081620;--nav2:#14283A;--nav-ink:#D2E0EA;--nav-muted:#8FA6B6;--nav-active:#167565;
+    --teal:#3FB5A3;--teal-soft:#123A36;--teal-ink:#86DFD1;
+    --orange:#F08A4B;--orange-soft:#3D2414;--orange-ink:#F6B58A;
+    --blue:#6FA3E8;--blue-soft:#16283F;--blue-ink:#A9C8F2;
+    --purple:#A98BE0;--purple-soft:#2A2040;--purple-ink:#CDB9F2;
+    --grey-soft:#22323E;--grey-ink:#B8C8D4;
+    --map-bg:#18252E;--map-block:#22323C;--road:#34495A;--water:#2B4F66;--park:#22402E;
+    --heat1:#2A2520;--heat2:#3A2B1E;--heat3:#4C3220;--heat4:#603A1F;
+    --sur2:#2E5689;--sur1:#1E3654;--def1:#4A2E1A;--def2:#6E3F1C;
+    --shadow:0 1px 3px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg:#F3F6F8;--surface:#FFFFFF;--surface2:#F4F6F8;--line:#DCE3E8;--line2:#EEF2F4;
+    --ink:#14212B;--muted:#4F6170;--muted2:#8C9AA5;
+    --nav:#0F2A3D;--nav2:#1B3A52;--nav-ink:#DCE7EE;--nav-muted:#A9BDCB;--nav-active:#17806F;
+    --teal:#0B7A6E;--teal-soft:#DDF1EE;--teal-ink:#075A51;
+    --orange:#D2601A;--orange-soft:#FDEBDD;--orange-ink:#9A3F0B;
+    --blue:#2563B8;--blue-soft:#E1ECFA;--blue-ink:#1F4F8F;
+    --purple:#6B44B0;--purple-soft:#EEE7F8;--purple-ink:#4F2F8A;
+    --grey-soft:#E9EEF1;--grey-ink:#33475A;
+    --map-bg:#EEF2EF;--map-block:#E2E7E4;--road:#FFFFFF;--water:#A8CBE0;--park:#CFE3CC;
+    --heat1:#FDF3EA;--heat2:#F9E3CF;--heat3:#F5D6BB;--heat4:#F2C9A6;
+    --sur2:#A9C6EE;--sur1:#D6E4F7;--def1:#FBE1CC;--def2:#F4BE92;
+    --shadow:0 1px 3px rgba(15,42,61,.16);
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.45}
+  button,input,select,textarea{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  a{color:var(--teal)}
+
+  .shell{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100%}
+  .side{background:var(--nav);color:var(--nav-ink);padding:20px 16px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;max-height:100%;overflow-y:auto}
+  .brand{display:flex;align-items:center;gap:12px;padding:4px 8px;color:#fff;font-weight:800;font-size:13px;line-height:1.2;letter-spacing:.05em}
+  .brand small{display:block;font-size:10px;color:var(--teal);letter-spacing:.08em;font-weight:700}
+
+  .navlist{display:flex;flex-direction:column;gap:4px}
+  .navlist a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;color:var(--nav-ink);text-decoration:none;font-weight:500;white-space:nowrap;transition:background .15s}
+  .navlist a:hover{background:var(--nav2)}
+  .navlist a[aria-current="page"]{background:var(--nav-active);color:#fff;font-weight:700}
+  .navlist svg{flex:none}
+
+  /* theme switcher widget */
+  .theme-box{background:var(--nav2);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;border:1px solid #28445A}
+  .theme-box label{font-size:11px;color:var(--nav-muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .theme-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#0A1B28;padding:3px;border-radius:6px}
+  .theme-btn{background:transparent;border:0;color:var(--nav-muted);font-size:11px;font-weight:600;padding:5px 4px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:3px;transition:all .15s}
+  .theme-btn:hover{color:#fff}
+  .theme-btn.active{background:var(--nav-active);color:#fff;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+
+  .who{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:14px 8px 0;border-top:1px solid var(--nav2)}
+  .avatar{width:36px;height:36px;border-radius:50%;background:var(--nav2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex:none}
+  .who b{display:block;color:#fff;font-weight:600;font-size:13px}.who span{font-size:11px;color:var(--nav-muted)}
+  .role{width:100%;margin-top:4px;background:var(--nav2);color:var(--nav-ink);border:1px solid #2B4A63;border-radius:8px;padding:7px 10px;min-height:38px}
+
+  main{min-width:0;padding:24px 32px 48px;display:flex;flex-direction:column;gap:20px}
+  .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+  .head h1{font-size:26px;font-weight:800;letter-spacing:-.01em}
+  .head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .titlerow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .badge-ill{background:var(--orange-soft);color:var(--orange-ink);font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:999px}
+  .badge-city{background:var(--teal-soft);color:var(--teal-ink);font-size:11px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .crumb a{text-decoration:none;font-weight:600}
+
+  .banner-kec{background:var(--teal-soft);border:1px solid var(--teal);color:var(--teal-ink);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .banner-kec b{font-size:15px;font-weight:800}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+  .card h2{font-size:16px;font-weight:700}
+  .cardhead{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .note{font-size:12px;color:var(--muted)}
+  .row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+  .row>.w3{flex:3 1 540px;min-width:0}.row>.w2{flex:2 1 340px;min-width:0}.row>.w1{flex:1 1 320px;min-width:0}
+  .grid-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+  .kpi .l{color:var(--muted);font-weight:600;font-size:13px}
+  .kpi .v{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+  .kpi .s{font-size:12px;color:var(--muted)}
+  .up{color:var(--teal-ink);font-weight:700}
+  .warn{color:var(--orange-ink)}
+  .bar{height:8px;background:var(--grey-soft);border-radius:4px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:var(--teal);border-radius:inherit}
+  .tag-map{font-size:11px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--nav);padding:4px 8px;border-radius:6px}
+
+  .field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+  select,.input{min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:500}
+  .seg{display:flex;gap:4px;background:var(--grey-soft);padding:4px;border-radius:10px;flex-wrap:wrap}
+  .seg button{border:0;background:transparent;color:var(--muted);font-weight:600;font-size:13px;min-height:36px;padding:0 14px;border-radius:8px;cursor:pointer;transition:all .15s}
+  .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pills button{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;font-size:12px;min-height:36px;padding:0 14px;border-radius:999px;cursor:pointer;transition:all .15s}
+  .pills button[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-ink)}
+  .btn{min-height:42px;padding:0 16px;border-radius:8px;font-weight:700;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-size:13px;transition:all .15s}
+  .btn.pri{background:var(--teal);color:#fff}
+  :root[data-theme="dark"] .btn.pri{color:#06201C}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.pri{color:#06201C}}
+  .btn.sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+  .btn.out{background:var(--surface);color:var(--teal-ink);border-color:var(--teal)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .linkbtn{white-space:nowrap;background:none;border:0;padding:4px 0;color:var(--teal-ink);font-weight:700;cursor:pointer;text-decoration:underline;min-height:32px;font-size:13px}
+
+  .chip{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap}
+  .chip.teal{background:var(--teal-soft);color:var(--teal-ink)}
+  .chip.orange{background:var(--orange-soft);color:var(--orange-ink)}
+  .chip.blue{background:var(--blue-soft);color:var(--blue-ink)}
+  .chip.purple{background:var(--purple-soft);color:var(--purple-ink)}
+  .chip.grey{background:var(--grey-soft);color:var(--grey-ink)}
+  .chip.late{background:var(--orange-ink);color:#fff}
+
+  .tablewrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--muted);font-size:12px;font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:9px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}
+  tr.sel td{background:var(--teal-soft)}
+  .num{font-variant-numeric:tabular-nums}
+  .sub{font-size:12px;color:var(--muted)}
+
+  /* Leaflet Map Containers */
+  .leaflet-map-frame{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .leaflet-container{font-family:var(--font);background:var(--bg)}
+  .leaflet-popup-content-wrapper{background:var(--surface);color:var(--ink);border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.25);border:1px solid var(--line)}
+  .leaflet-popup-tip{background:var(--surface)}
+  .leaflet-control-zoom a{background:var(--surface)!important;color:var(--ink)!important;border-color:var(--line)!important}
+
+  /* Clean Dark Mode for OpenStreetMap Tiles (100% Free, No Watermark, No API Key) */
+  :root[data-theme="dark"] .leaflet-tile-pane {
+    filter: brightness(0.65) invert(1) contrast(1.6) hue-rotate(200deg) saturate(0.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .leaflet-tile-pane {
+      filter: brightness(0.65) invert(1) contrast(1.6) hue-rotate(200deg) saturate(0.25);
+    }
+  }
+  :root[data-theme="light"] .leaflet-tile-pane {
+    filter: none !important;
+  }
+
+  /* Custom HTML Pins on Leaflet Map */
+  .custom-pin-wrap{background:transparent;border:none}
+  .leaflet-pin{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;border:3px solid var(--surface);box-shadow:var(--shadow);cursor:pointer;transition:transform .15s ease}
+  .leaflet-pin:hover{transform:scale(1.15)}
+  .leaflet-pin.selected{box-shadow:0 0 0 4px var(--ink);transform:scale(1.2)}
+  .p-cek{background:var(--orange)}.p-baru{background:var(--purple)}.p-belum{background:#5E6E7A}.p-ok{background:var(--teal)}
+
+  .map-overlay-info{position:absolute;left:12px;bottom:12px;z-index:900;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:flex;flex-direction:column;gap:5px;font-size:11px;box-shadow:var(--shadow)}
+  .map-overlay-info span{display:flex;align-items:center;gap:8px}
+  .sw{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+  .legend-row{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);align-items:center}
+  .legend-row span{display:flex;align-items:center;gap:6px}
+  .ln{width:20px;height:4px;border-radius:2px;display:inline-block}
+
+  .photo{border-radius:10px;overflow:hidden;border:1px solid var(--line);position:relative;background:var(--map-block)}
+  .photo .cap{position:absolute;left:8px;bottom:8px;background:var(--nav);color:#fff;font-size:11px;padding:3px 8px;border-radius:4px}
+  .ph{aspect-ratio:4/3;max-width:100%;border-radius:8px;background:var(--map-block);display:flex;align-items:flex-end;padding:8px;font-size:11px;color:var(--muted);font-weight:600}
+  dl.kv{margin:0;display:grid;grid-template-columns:110px 1fr;gap:8px 12px;font-size:13px}
+  dl.kv dt{color:var(--muted)}dl.kv dd{margin:0;font-weight:600}
+
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .tier{border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px;border:1px solid var(--line)}
+  .tier .t{font-size:11px;font-weight:700;letter-spacing:.06em}
+  .tier .v{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+  .tier p{margin:0;font-size:12px;color:var(--muted)}
+  .tier .c{font-size:11px;font-weight:700}
+  .tier.pot{background:var(--surface2)}.tier.pot .t,.tier.pot .c{color:var(--muted)}
+  .tier.est{background:var(--blue-soft)}.tier.est .t,.tier.est .c{color:var(--blue-ink)}
+  .tier.act{background:var(--teal-soft)}.tier.act .t,.tier.act .c{color:var(--teal-ink)}
+
+  .catrow{display:grid;grid-template-columns:84px 1fr 80px;align-items:center;gap:12px}
+  .prio{display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--line2);border-radius:8px;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left;transition:background .15s}
+  .prio:hover,.prio.on{background:var(--surface2)}
+  .sq{width:32px;height:32px;border-radius:8px;background:var(--nav);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-size:11px}
+  .big{font-size:20px;font-weight:800;color:var(--orange-ink);font-variant-numeric:tabular-nums}
+
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+  .flow div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+  .flow div.hl{background:var(--nav);color:#fff;border-color:var(--nav)}
+  .flow .k{font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.8}
+  .flow .n{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+  .flow .u{font-size:11px;opacity:.85}
+  .steps{display:flex;flex-direction:column}
+  .step{display:flex;gap:12px;align-items:center;padding:6px 0}
+  .step i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:800;color:#fff}
+  .step.done i{background:var(--teal);border-color:var(--teal)}
+  .step.now i{border-color:var(--orange)}.step.now{font-weight:700}
+  .step.todo{color:var(--muted)}
+  .search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:0 12px;min-height:40px;background:var(--surface);color:var(--muted)}
+  .search input{border:0;outline:none;background:transparent;width:170px;min-width:0;font-size:13px}
+
+  .timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .timeline li{display:grid;grid-template-columns:95px 12px 1fr;gap:10px}
+  .timeline .d{font-size:12px;color:var(--muted)}
+  .timeline .b{width:10px;height:10px;border-radius:50%;margin-top:4px}
+  .tree{list-style:none;margin:0 0 0 16px;padding:0 0 0 14px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:8px}
+  .tree li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:var(--surface2)}
+  .tree li.me{background:var(--teal-soft)}
+  .parent{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--nav);color:#fff;border-radius:8px}
+  .mini{background:var(--surface2);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:2px}
+  .mini .v{font-size:20px;font-weight:800}
+  .occ{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:120px}
+  .occ div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%;font-size:11px}
+  .occ b{width:100%;max-width:40px;border-radius:4px 4px 0 0;display:block}
+
+  /* Komoditas */
+  .bars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:end;height:240px;border-bottom:1px solid var(--line);padding:0 6px}
+  .bars>div{display:flex;justify-content:center;align-items:flex-end;gap:6px;height:100%}
+  .bars .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%;width:38%;font-size:11px;font-weight:700}
+  .bars .stack{width:100%;display:flex;flex-direction:column}
+  .bars .p{background:var(--teal);border-radius:4px 4px 0 0;width:100%;transition:height .3s}
+  .bars .u{background:var(--def2);border-radius:4px 4px 0 0;transition:height .3s}
+  .bars .r{background:var(--orange);transition:height .3s}
+  .barlabels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;text-align:center;font-size:12px;padding:4px 6px}
+  .rec{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px}
+  .rec .mid{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .rec .mid hr{width:100%;border:0;border-top:2px dashed var(--ink);margin:0}
+  .info{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--muted)}
+  .actor{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line2)}
+  .lbl{font-size:11px;font-weight:700;letter-spacing:.06em}
+
+  /* Survei Phone */
+  .phone{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 10px 30px rgba(15,42,61,.12);display:flex;flex-direction:column}
+  .phone header{background:var(--nav);color:#fff;padding:16px;display:flex;flex-direction:column;gap:12px}
+  .phone .body{padding:16px;display:flex;flex-direction:column;gap:14px;background:var(--bg)}
+  .phone footer{border-top:1px solid var(--line);padding:12px 16px 18px;display:flex;gap:10px;background:var(--surface)}
+  .phone label{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:12px}
+  .catgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .catgrid button{min-height:44px;border-radius:8px;border:2px solid var(--line);background:var(--surface);font-weight:600;font-size:13px;cursor:pointer}
+  .catgrid button[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft);color:var(--teal-ink)}
+  .alert{background:var(--orange-soft);border-radius:10px;padding:10px 12px;display:flex;gap:10px;font-size:12px;color:var(--orange-ink)}
+  .gps{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;gap:12px;align-items:center}
+  .err{color:var(--orange-ink);font-size:12px;font-weight:600}
+
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--nav);color:#fff;padding:12px 20px;border-radius:8px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:9999;max-width:calc(100% - 32px);font-size:13px}
+  .foot{font-size:12px;color:var(--muted);margin:0}
+
+  @media (max-width:880px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    .side{position:static;height:auto;padding:14px 16px;gap:12px}
+    .navlist{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+    .who{display:none}
+    main{padding:16px 16px 40px}
+    .head h1{font-size:22px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5FD3C2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div>
+        <span>PETA POTENSI</span>
+        <small>KOTA DENPASAR</small>
+      </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-box">
+      <label>Tampilan Tema</label>
+      <div class="theme-switch" id="themeSwitch">
+        <button type="button" class="theme-btn" data-theme-val="light" title="Mode Terang">☀️ Terang</button>
+        <button type="button" class="theme-btn" data-theme-val="dark" title="Mode Gelap">🌙 Gelap</button>
+        <button type="button" class="theme-btn" data-theme-val="auto" title="Ikuti Pengaturan Sistem">💻 Auto</button>
+      </div>
+    </div>
+
+    <nav class="navlist" id="nav" aria-label="Navigasi utama"></nav>
+
+    <div class="who">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="avatar" id="avatar">PM</div>
+          <div><b id="roleName">Pimpinan</b><span>Bapenda Kota Denpasar</span></div>
+        </div>
+        <label for="roleSel" class="sub" style="display:block;margin-top:10px;color:var(--nav-muted)">Lihat sebagai</label>
+        <select id="roleSel" class="role">
+          <option value="PM">Pimpinan (Walikota / Kaban)</option>
+          <option value="VR">Verifikator Bidang Pajak</option>
+          <option value="PT">Petugas Lapangan Denpasar</option>
+          <option value="KP">Pengelola Pendapatan Daerah</option>
+          <option value="EK">Pengelola Perekonomian &amp; Pangan</option>
+        </select>
+      </div>
+    </div>
+  </aside>
+
+  <main id="view" tabindex="-1"></main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+/* ---------- Icons & Navigation ---------- */
+const ICON={
+  dashboard:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  penyisiran:'<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+  objek:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>',
+  tindaklanjut:'<path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+  komoditas:'<path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 12C12 8 9.5 6 5 6c0 3.5 2.5 6 7 6z"/>',
+  survei:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'
+};
+const svg=(p,s)=>`<svg width="${s||18}" height="${s||18}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const PAGES=[
+  ['dashboard','Dashboard Denpasar'],
+  ['penyisiran','Penyisiran Jalan'],
+  ['objek','Data Objek'],
+  ['tindaklanjut','Tindak Lanjut'],
+  ['komoditas','Komoditas & Pangan'],
+  ['survei','Aplikasi Petugas']
+];
+const fmt=n=>n.toLocaleString('id-ID');
+const ST={
+  ok:['Terverifikasi','teal'],
+  cek:['Perlu verifikasi','orange'],
+  svy:['Dalam survei','blue'],
+  baru:['Objek baru','purple'],
+  belum:['Belum diperiksa','grey'],
+  ver:['Verifikasi','orange'],
+  tl:['Tindak lanjut','blue'],
+  late:['Lewat tenggat','late'],
+  done:['Selesai','teal'],
+  sdone:['Selesai','teal'],
+  spart:['Dilalui, belum lengkap','orange'],
+  srun:['Berjalan','blue'],
+  stodo:['Belum dimulai','grey']
+};
+const chip=k=>`<span class="chip ${ST[k][1]}">${ST[k][0]}</span>`;
+const ill='<span class="badge-ill">DATA POTENSI DAERAH</span>';
+const cityBadge='<span class="badge-city">KOTA DENPASAR</span>';
+
+/* ---------- Theme Manager (Dark / Light / Auto) ---------- */
+let currentThemeMode = localStorage.getItem('themeMode') || 'auto';
+
+function applyTheme(mode) {
+  currentThemeMode = mode;
+  localStorage.setItem('themeMode', mode);
+  
+  if (mode === 'auto') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeVal === mode);
+  });
+}
+
+function isDarkEffective() {
+  const dt = document.documentElement.getAttribute('data-theme');
+  if (dt === 'dark') return true;
+  if (dt === 'light') return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+const OSM_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> kontributor';
+
+/* ---------- 4 Kecamatan Kota Denpasar (Detailed Data & Polygons) ---------- */
+const DENPASAR_CENTER = [-8.665, 115.215];
+const DENPASAR_ZOOM = 12;
+
+const KECAMATAN_DATA = {
+  'Denpasar Barat': {
+    name: 'Kecamatan Denpasar Barat',
+    short: 'Barat',
+    center: [-8.668, 115.195],
+    zoom: 14,
+    open: 64, cov: 52,
+    potensi: 'Rp13,8 M', estimasi: 'Rp3,6 M', aktual: 'Rp2,8 M',
+    objekCount: 420,
+    fillColor: '#F08A4B',
+    desc: 'Sentra niaga & ritel utama: Jl. Teuku Umar, Kawasan Pasar Badung & Kumbasari, Level 21 Mall, Simpang Enam.',
+    coords: [
+      [-8.642, 115.205], [-8.645, 115.215], [-8.680, 115.212],
+      [-8.692, 115.185], [-8.680, 115.170], [-8.645, 115.175]
+    ]
+  },
+  'Denpasar Selatan': {
+    name: 'Kecamatan Denpasar Selatan',
+    short: 'Selatan',
+    center: [-8.698, 115.235],
+    zoom: 13,
+    open: 41, cov: 71,
+    potensi: 'Rp15,2 M', estimasi: 'Rp4,1 M', aktual: 'Rp3,1 M',
+    objekCount: 380,
+    fillColor: '#F9E3CF',
+    desc: 'Kawasan pariwisata pantai & perkantoran: Sanur, Renon (Lapangan Puputan Renon), Sidakarya, Panjer, Serangan.',
+    coords: [
+      [-8.680, 115.212], [-8.672, 115.235], [-8.670, 115.265],
+      [-8.705, 115.268], [-8.735, 115.235], [-8.715, 115.195], [-8.692, 115.185]
+    ]
+  },
+  'Denpasar Timur': {
+    name: 'Kecamatan Denpasar Timur',
+    short: 'Timur',
+    center: [-8.645, 115.248],
+    zoom: 14,
+    open: 28, cov: 80,
+    potensi: 'Rp6,4 M', estimasi: 'Rp1,7 M', aktual: 'Rp1,2 M',
+    objekCount: 210,
+    fillColor: '#FDF3EA',
+    desc: 'Kawasan cagar budaya & sentra pendidikan: Taman Budaya Art Center, Jl. Hayam Wuruk, Penatih, Kesiman.',
+    coords: [
+      [-8.618, 115.245], [-8.630, 115.270], [-8.670, 115.265],
+      [-8.672, 115.235], [-8.640, 115.230]
+    ]
+  },
+  'Denpasar Utara': {
+    name: 'Kecamatan Denpasar Utara',
+    short: 'Utara',
+    center: [-8.620, 115.218],
+    zoom: 14,
+    open: 53, cov: 61,
+    potensi: 'Rp7,2 M', estimasi: 'Rp1,8 M', aktual: 'Rp1,3 M',
+    objekCount: 230,
+    fillColor: '#F5D6BB',
+    desc: 'Koridor bisnis lintas kota & lumbung agrowisata: Jl. Gatot Subroto (Gatsu), Terminal Ubung, Subak Sembung Peguyangan.',
+    coords: [
+      [-8.590, 115.205], [-8.595, 115.235], [-8.618, 115.245],
+      [-8.640, 115.230], [-8.642, 115.205], [-8.625, 115.190], [-8.605, 115.195]
+    ]
+  }
+};
+
+/* ---------- Shared Application State ---------- */
+const S = {
+  page: 'dashboard',
+  kec: 'all',
+  pinFilter: 'all',
+  pinSel: 'R-014',
+  tlTab: 'all',
+  tlSel: 'TL-121',
+  tlQuery: '',
+  kom: 'cabai',
+  svCat: 'rek',
+  svDone: 6,
+  svSent: 0,
+  svErr: '',
+  objects: [
+    {
+      id:'R-014', sh:'R', cat:'rek', type:'Reklame · Billboard 4x8', s:'cek',
+      lat:-8.6748, lng:115.2045, road:'Jl. Teuku Umar No. 88', seg:'U-07', kec:'Denpasar Barat',
+      team:'Tim A', time:'14 Sep 2026, 09.42', k1:'Ukuran', v1:'4 × 8 m, 2 sisi',
+      k2:'Masa pasang', v2:'Belum diketahui', match:'Tidak ditemukan di daftar izin daerah'
+    },
+    {
+      id:'R-015', sh:'R', cat:'rek', type:'Reklame · Papan Toko', s:'belum',
+      lat:-8.6780, lng:115.1920, road:'Jl. Teuku Umar Barat No. 131', seg:'U-07', kec:'Denpasar Barat',
+      team:'Tim A', time:'—', k1:'Ukuran', v1:'Belum diukur',
+      k2:'Masa pasang', v2:'—', match:'Terdaftar izin (2023)'
+    },
+    {
+      id:'P-022', sh:'P', cat:'pkr', type:'Parkir · Tepi Jalan Gajah Mada', s:'cek',
+      lat:-8.6572, lng:115.2160, road:'Jl. Gajah Mada (Kawasan Pasar Badung)', seg:'U-06', kec:'Denpasar Barat',
+      team:'Tim B', time:'15 Sep 2026, 10.15', k1:'Kapasitas', v1:'± 120 motor, 35 mobil',
+      k2:'Pengamatan', v2:'2 hari, 06.00–18.00', match:'Pengelola berbeda dari SK penetapan'
+    },
+    {
+      id:'P-003', sh:'P', cat:'pkr', type:'Parkir Gedung · Level 21 Mall', s:'ok',
+      lat:-8.6740, lng:115.2120, road:'Jl. Teuku Umar No. 1', seg:'U-05', kec:'Denpasar Barat',
+      team:'Tim B', time:'12 Sep 2026, 14.10', k1:'Kapasitas', v1:'420 motor, 180 mobil',
+      k2:'Pengamatan', v2:'1–7 Sep 2026', match:'Terverifikasi pembaruan kapasitas'
+    },
+    {
+      id:'R-016', sh:'R', cat:'rek', type:'Reklame · Baliho Promosi', s:'cek',
+      lat:-8.6925, lng:115.2535, road:'Jl. By Pass Ngurah Rai Sanur', seg:'K-02', kec:'Denpasar Selatan',
+      team:'Tim C', time:'13 Sep 2026, 16.05', k1:'Ukuran', v1:'3 × 5 m, 1 sisi',
+      k2:'Masa pasang', v2:'Izin s.d. Agu 2026', match:'Izin masa pasang kedaluwarsa'
+    },
+    {
+      id:'K-007', sh:'K', cat:'rst', type:'Restoran & Kafe Renon', s:'ok',
+      lat:-8.6720, lng:115.2340, road:'Jl. Raya Puputan Renon', seg:'U-05', kec:'Denpasar Selatan',
+      team:'Tim A', time:'10 Sep 2026, 11.30', k1:'Kursi', v1:'± 90 kursi',
+      k2:'Jam buka', v2:'09.00–23.00', match:'Terdaftar resmi & taat pelaporan'
+    },
+    {
+      id:'K-031', sh:'K', cat:'rst', type:'Restoran · Ayam Betutu Denpasar', s:'baru',
+      lat:-8.6610, lng:115.2360, road:'Jl. Hayam Wuruk No. 12', seg:'U-05', kec:'Denpasar Timur',
+      team:'Tim A', time:'15 Sep 2026, 13.20', k1:'Kursi', v1:'± 60 kursi',
+      k2:'Jam buka', v2:'10.00–22.00', match:'Belum terdaftar NPWPD'
+    },
+    {
+      id:'R-017', sh:'R', cat:'rek', type:'Reklame · Spanduk Komersial', s:'belum',
+      lat:-8.6365, lng:115.2235, road:'Jl. Gatot Subroto Tengah No. 45', seg:'P-01', kec:'Denpasar Utara',
+      team:'Tim C', time:'—', k1:'Ukuran', v1:'Belum diukur',
+      k2:'Masa pasang', v2:'—', match:'Belum diverifikasi lapangan'
+    },
+    {
+      id:'L-004', sh:'L', cat:'lain', type:'SPBU & Fasilitas Penunjang', s:'cek',
+      lat:-8.6680, lng:115.2140, road:'Jl. Diponegoro No. 80', seg:'U-06', kec:'Denpasar Barat',
+      team:'Tim C', time:'11 Sep 2026, 15.00', k1:'Fasilitas', v1:'Dispenser BBM & minimarket',
+      k2:'Pengamatan', v2:'Cek kewenangan pajak air tanah', match:'Perlu validasi kewenangan provinsi vs kota'
+    }
+  ],
+  findings: [
+    {id:'TL-121',obj:'Billboard Jl. Teuku Umar',oid:'R-014',kec:'Denpasar Barat',kind:'Objek belum terdaftar',team:'Tim A',due:'24 Sep 2026',ev:4,s:'ver',res:'—'},
+    {id:'TL-118',obj:'Parkir Level 21 Mall Denpasar',oid:'P-003',kec:'Denpasar Barat',kind:'Selisih kapasitas dengan izin',team:'Tim B',due:'30 Sep 2026',ev:3,s:'tl',res:'—'},
+    {id:'TL-115',obj:'Baliho By Pass Sanur',oid:'R-016',kec:'Denpasar Selatan',kind:'Izin pemasangan kedaluwarsa',team:'Tim C',due:'20 Sep 2026',ev:2,s:'late',res:'—'},
+    {id:'TL-112',obj:'Rumah Makan Betutu Jl. Hayam Wuruk',oid:'K-031',kec:'Denpasar Timur',kind:'Usaha baru belum terdaftar',team:'Tim A',due:'28 Sep 2026',ev:3,s:'ver',res:'—'},
+    {id:'TL-109',obj:'Parkir Jl. Gajah Mada (Pasar Badung)',oid:'P-022',kec:'Denpasar Barat',kind:'Pengelola berbeda dari SK',team:'Tim B',due:'18 Sep 2026',ev:2,s:'late',res:'—'},
+    {id:'TL-104',obj:'Reklame Jl. Gatot Subroto',oid:'R-017',kec:'Denpasar Utara',kind:'Ukuran reklame bertambah',team:'Tim C',due:'10 Sep 2026',ev:5,s:'done',res:'Data diperbarui · Tambahan Rp18 jt tercatat'},
+    {id:'TL-101',obj:'Restoran Kawasan Renon',oid:'K-007',kec:'Denpasar Selatan',kind:'Pembaruan omzet pelaporan',team:'Tim A',due:'05 Sep 2026',ev:4,s:'done',res:'Terverifikasi · Tambahan Rp9 jt tercatat'},
+    {id:'TL-097',obj:'SPBU Jl. Diponegoro',oid:'L-004',kec:'Denpasar Barat',kind:'Verifikasi kewenangan pajak',team:'Tim C',due:'03 Sep 2026',ev:1,s:'done',res:'Kewenangan Provinsi Bali · Berkas ditutup'}
+  ],
+  nextTL: 122
+};
+
+/* ---------- Denpasar Road Segments ---------- */
+const DENPASAR_SEGMENTS = [
+  {
+    id: 'U-05', name: 'Jl. Teuku Umar (Simpang Enam – Level 21)', team: 'Tim A',
+    kec: 'Denpasar Barat', done: 14, total: 14, status: 'sdone', due: '10 Sep',
+    coords: [[-8.6775, 115.1985], [-8.6755, 115.2055], [-8.6740, 115.2125]]
+  },
+  {
+    id: 'U-06', name: 'Jl. Gajah Mada (Kawasan Pasar Badung)', team: 'Tim A',
+    kec: 'Denpasar Barat', done: 11, total: 11, status: 'sdone', due: '12 Sep',
+    coords: [[-8.6575, 115.2120], [-8.6572, 115.2165], [-8.6568, 115.2215]]
+  },
+  {
+    id: 'U-07', name: 'Jl. Teuku Umar Barat (km 2,4 – 3,5)', team: 'Tim A',
+    kec: 'Denpasar Barat', done: 6, total: 9, status: 'spart', due: '17 Sep',
+    coords: [[-8.6775, 115.1985], [-8.6800, 115.1880], [-8.6820, 115.1760]]
+  },
+  {
+    id: 'P-01', name: 'Jl. Gatot Subroto Tengah & Timur', team: 'Tim C',
+    kec: 'Denpasar Utara', done: 3, total: 8, status: 'srun', due: '19 Sep',
+    coords: [[-8.6360, 115.2080], [-8.6365, 115.2230], [-8.6372, 115.2450]]
+  },
+  {
+    id: 'K-02', name: 'Jl. By Pass Ngurah Rai (Sanur)', team: 'Tim B',
+    kec: 'Denpasar Selatan', done: 0, total: 7, status: 'stodo', due: '22 Sep',
+    coords: [[-8.6750, 115.2580], [-8.6930, 115.2530], [-8.7120, 115.2440]]
+  }
+];
+
+/* ---------- Denpasar Commodities ---------- */
+const KOM = {
+  cabai: {
+    label: 'Cabai rawit', biz: 0.35,
+    p: [45, 25, 85, 125], // Barat, Selatan, Timur, Utara
+    k: [95, 85, 45, 35],
+    recs: [
+      ['Denpasar Utara', 'Denpasar Barat', 45, 'Pasokan dari Subak Peguyangan ke Pasar Badung'],
+      ['Denpasar Timur', 'Denpasar Selatan', 30, 'Dari lumbung Penatih ke sentra kuliner Sanur & Renon']
+    ],
+    prod: [
+      ['Gapoktan Peguyangan', 'Denpasar Utara · 18 ha', '48 t'],
+      ['Kelompok Tani Penatih', 'Denpasar Timur · 14 ha', '37 t'],
+      ['Petani Hortikultura Ubung', 'Denpasar Utara · 11 ha', '29 t']
+    ],
+    buy: [
+      ['Pasar Badung & Kumbasari', 'Denpasar Barat', '55 t'],
+      ['Sentra Kuliner Sanur & Renon', 'Denpasar Selatan · 95 usaha', '24 t'],
+      ['Industri Sambal Olahan', 'Denpasar Barat · 8 unit', '14 t']
+    ]
+  },
+  beras: {
+    label: 'Beras', biz: 0.20,
+    p: [160, 110, 680, 840],
+    k: [740, 710, 360, 420],
+    recs: [
+      ['Denpasar Utara', 'Denpasar Barat', 260, 'Dari Subak Sembung ke gudang distributor Teuku Umar'],
+      ['Denpasar Timur', 'Denpasar Selatan', 220, 'Dari Subak Anggabaya ke pasar induk & katering selatan']
+    ],
+    prod: [
+      ['Subak Sembung Lestari', 'Denpasar Utara · 115 ha', '380 t'],
+      ['Subak Anggabaya Penatih', 'Denpasar Timur · 90 ha', '310 t'],
+      ['Koperasi Pangan Denpasar Timur', 'Denpasar Timur', '240 t']
+    ],
+    buy: [
+      ['Distributor Pangan Teuku Umar', 'Denpasar Barat', '310 t'],
+      ['Pasar Kumbasari & Kreneng', 'Denpasar Barat & Timur', '240 t'],
+      ['Asosiasi Katering Denpasar Selatan', 'Denpasar Selatan', '110 t']
+    ]
+  },
+  nila: {
+    label: 'Ikan & Hasil Laut', biz: 0.30,
+    p: [15, 110, 40, 18],
+    k: [65, 50, 35, 30],
+    recs: [
+      ['Denpasar Selatan', 'Denpasar Barat', 32, 'Dari TPI Serangan & Pantai Sanur ke Pasar Ikan Badung'],
+      ['Denpasar Selatan', 'Denpasar Timur', 16, 'Ke jaringan rumah makan ikan bakar Hayam Wuruk']
+    ],
+    prod: [
+      ['Kelompok Nelayan Serangan', 'Denpasar Selatan · 36 armada', '58 t'],
+      ['Budidaya Keramba Pantai Mertasari', 'Denpasar Selatan', '32 t'],
+      ['Pokdakan Air Tawar Penatih', 'Denpasar Timur', '24 t']
+    ],
+    buy: [
+      ['Sentra Ikan Bakar & Kuliner', 'Denpasar Barat · 32 resto', '28 t'],
+      ['Pasar Ikan Tradisional Badung', 'Denpasar Barat', '24 t'],
+      ['Restoran Seafood Pantai Sanur', 'Denpasar Selatan · 20 resto', '18 t']
+    ]
+  }
+};
+
+/* ---------- Toast Notification ---------- */
+let tt;
+function toast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;
+  t.hidden=false;
+  clearTimeout(tt);
+  tt=setTimeout(()=>t.hidden=true, 2800);
+}
+
+/* ---------- Leaflet Map References & Cleanup ---------- */
+let dashMap = null, dashTileLayer = null, dashKecLayers = {};
+let penyisiranMap = null, penyisiranTileLayer = null, penyisiranPins = {};
+let komoditasMap = null, komoditasTileLayer = null;
+
+function cleanupMaps() {
+  if (dashMap) { dashMap.remove(); dashMap = null; dashTileLayer = null; dashKecLayers = {}; }
+  if (penyisiranMap) { penyisiranMap.remove(); penyisiranMap = null; penyisiranTileLayer = null; penyisiranPins = {}; }
+  if (komoditasMap) { komoditasMap.remove(); komoditasMap = null; komoditasTileLayer = null; }
+}
+
+function makePinIcon(sh, s, isSelected) {
+  return L.divIcon({
+    className: 'custom-pin-wrap',
+    html: `<div class="leaflet-pin ${isSelected ? 'selected' : ''} p-${s}"><span>${sh}</span></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -14]
+  });
+}
+
+/* ---------- VIEW: DASHBOARD (DENGAN DRILLDOWN KECAMATAN) ---------- */
+function vDashboard(targetKec){
+  // If targetKec specified from URL or click
+  if (targetKec && KECAMATAN_DATA[targetKec]) {
+    S.kec = targetKec;
+  }
+  const f = S.kec;
+  const isKecView = (f !== 'all' && KECAMATAN_DATA[f]);
+  const kd = isKecView ? KECAMATAN_DATA[f] : null;
+
+  const act = isKecView ? [220, 235, 245, 240, 255, 270, 275, 268, 280] : [820,860,910,880,950,990,1010,980,1000];
+  const est = isKecView ? [310, 320, 330, 335, 340, 350, 355, 350, 360] : [1180,1210,1230,1240,1250,1260,1250,1240,1260];
+  const maxV = isKecView ? 400 : 1400;
+  const minV = isKecView ? 150 : 600;
+  const y = v => Math.round(160 - (v - minV) / (maxV - minV) * 140);
+  const pts = a => a.map((v,i)=>(60+i*55)+','+y(v)).join(' ');
+
+  const rows = S.objects.map(o=>[o.id, o.type.split('·')[0].trim(), o.kec, o.road, o.s, o.time.split(',')[0], o.match])
+    .filter(r => f === 'all' || r[2] === f);
+  
+  const cats = isKecView ? [
+    ['Reklame', 145, 35, 'var(--orange)'],
+    ['Parkir', 110, 27, 'var(--blue)'],
+    ['Restoran', 95, 23, 'var(--teal)'],
+    ['Lainnya', 70, 15, 'var(--purple)']
+  ] : [
+    ['Reklame', 420, 34, 'var(--orange)'],
+    ['Parkir', 310, 25, 'var(--blue)'],
+    ['Restoran', 260, 21, 'var(--teal)'],
+    ['Lainnya', 250, 20, 'var(--purple)']
+  ];
+
+  const totalPot = isKecView ? kd.potensi : 'Rp42,6 M';
+  const totalEst = isKecView ? kd.estimasi : 'Rp11,2 M';
+  const totalAct = isKecView ? kd.aktual : 'Rp8,4 M';
+  const totalObj = isKecView ? kd.objekCount : 1240;
+  const openCount = isKecView ? kd.open : S.findings.filter(x => x.s !== 'done').length;
+
+  return `
+  <div class="head">
+    <div>
+      <div class="crumb">
+        <a href="#dashboard" data-act="drillKec" data-k="all">Kota Denpasar</a>
+        ${isKecView ? ` / <b>${kd.name}</b>` : ' / <b>Level Kota</b>'}
+      </div>
+      <div class="titlerow">
+        <h1>${isKecView ? kd.name : 'Dashboard Pendapatan Kota Denpasar'}</h1>
+        ${cityBadge}
+        ${ill}
+      </div>
+      <p>${isKecView ? kd.desc : 'Ringkasan potensi ekonomi daerah, estimasi PAD, dan peta interaktif 4 kecamatan Kota Denpasar. Klik kecamatan pada peta untuk masuk ke detail wilayah.'}</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <label class="field" for="per">Periode
+        <select id="per"><option>Jan – Sep 2026</option><option>Tahun 2025</option></select>
+      </label>
+      <label class="field" for="kecSel">Pilih Wilayah
+        <select id="kecSel" data-act="kec">
+          <option value="all" ${f==='all'?'selected':''}>Seluruh Kota Denpasar (4 Kecamatan)</option>
+          ${Object.keys(KECAMATAN_DATA).map(k=>`<option value="${k}" ${f===k?'selected':''}>${k}</option>`).join('')}
+        </select>
+      </label>
+    </div>
+  </div>
+
+  ${isKecView ? `
+  <div class="banner-kec">
+    <div style="display:flex;align-items:center;gap:10px">
+      ${svg('<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', 22)}
+      <div>
+        <b>Sedang Menampilkan Detail: ${kd.name}</b>
+        <div style="font-size:12px;opacity:.9">${kd.desc}</div>
+      </div>
+    </div>
+    <button class="btn pri" style="min-height:36px;padding:0 14px;font-size:12px" data-act="drillKec" data-k="all">&larr; Kembali ke Tampilan Seluruh Kota</button>
+  </div>` : ''}
+
+  <section class="grid-kpi" aria-label="Indikator utama">
+    <div class="kpi">
+      <span class="l">Objek Tercatat</span>
+      <span class="v">${fmt(totalObj)}</span>
+      <span class="s">${isKecView ? 'Objek di ' + kd.short : '<span class="up">+12%</span> dibanding periode sebelumnya'}</span>
+    </div>
+    <div class="kpi">
+      <span class="l">Temuan Perlu Verifikasi</span>
+      <span class="v warn">${openCount}</span>
+      <span class="s">Menunggu verifikasi lapangan</span>
+    </div>
+    <div class="kpi">
+      <span class="l">Cakupan Penyisiran Ruas</span>
+      <span class="v">${isKecView ? kd.cov + '%' : '68%'}</span>
+      <div class="bar"><i style="width:${isKecView ? kd.cov : 68}%"></i></div>
+      <span class="s">${isKecView ? 'Ruas jalan di ' + kd.short : '34 dari 50 segmen kota selesai'}</span>
+    </div>
+    <div class="kpi">
+      <span class="l">Realisasi PAD Kasda</span>
+      <span class="v">${totalAct}</span>
+      <span class="s">Tercatat masuk kas daerah Bapenda</span>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Tiga lapis nilai">
+    <div class="cardhead">
+      <h2>Potensi Ekonomi, Estimasi PAD, dan Realisasi Kasda ${isKecView ? '· ' + kd.short : ''}</h2>
+      <span class="note">Tiga lapis nilai: Potensi ekonomi &rarr; Estimasi PAD &rarr; Penerimaan kasda resmi</span>
+    </div>
+    <div class="tiers">
+      <div class="tier pot">
+        <span class="t">POTENSI EKONOMI ${isKecView ? kd.short.toUpperCase() : 'KOTA DENPASAR'}</span>
+        <span class="v">${totalPot}</span>
+        <p>Aktivitas ekonomi &amp; omzet hasil survei lapangan. Skala kapasitas usaha, bukan target pajak.</p>
+        <span class="c">Kepastian rendah · observasi lapangan</span>
+      </div>
+      <div class="tier est">
+        <span class="t">ESTIMASI PENERIMAAN PAD</span>
+        <span class="v">${totalEst}</span>
+        <p>Kategori objek terverifikasi &times; tarif resmi Perda Pajak/Retribusi Daerah.</p>
+        <span class="c">Kepastian sedang · asumsi perda</span>
+      </div>
+      <div class="tier act">
+        <span class="t">PENERIMAAN AKTUAL KASDA</span>
+        <span class="v">${totalAct}</span>
+        <p>Pembayaran resmi tercatat di kasda Bapenda Denpasar, tertaut langsung ke nomor SKP.</p>
+        <span class="c">Kepastian tinggi · pencatatan resmi</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;justify-content:space-between" class="note"><span>Realisasi terhadap estimasi</span><b style="color:var(--ink)">75%</b></div>
+      <div class="bar" style="height:10px"><i style="width:75%"></i></div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="card w3">
+      <div class="cardhead">
+        <h2>${isKecView ? 'Peta Fokus ' + kd.name : 'Peta Sebaran 4 Kecamatan Kota Denpasar'}</h2>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="tag-map">KLIK KECAMATAN UNTUK DETAIL</span>
+          ${isKecView ? `<button class="btn sec" style="min-height:32px;padding:0 10px;font-size:12px" data-act="drillKec" data-k="all">&larr; Zoom Out Kota</button>` : ''}
+        </div>
+      </div>
+
+      <div class="leaflet-map-frame">
+        <div id="dashMap" style="height:440px;width:100%"></div>
+        <div class="map-overlay-info">
+          <b>Kategori Objek:</b>
+          <span><i class="sw" style="background:var(--orange)"></i>Reklame / Billboard</span>
+          <span><i class="sw" style="background:var(--blue)"></i>Parkir Tepi Jalan &amp; Gedung</span>
+          <span><i class="sw" style="background:var(--teal)"></i>Restoran &amp; Rumah Makan</span>
+          <span><i class="sw" style="background:var(--purple)"></i>Lainnya / SPBU</span>
+        </div>
+      </div>
+      <span class="note">💡 <b>Petunjuk Interaktif:</b> Klik pada poligon salah satu kecamatan di peta untuk langsung masuk ke halaman potensi detail kecamatan tersebut.</span>
+    </div>
+
+    <div class="w2" style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="cardhead">
+          <h2>Tren Penerimaan Bulanan ${isKecView ? '· ' + kd.short : ''}</h2>
+          <div class="legend-row">
+            <span><i class="ln" style="background:var(--teal);height:3px"></i>Aktual</span>
+            <span><i style="width:16px;border-top:2px dashed var(--blue)"></i>Estimasi</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 520 200" width="100%" role="img" aria-label="Tren Penerimaan">
+          ${[20,55,90,125,160].map(v=>`<line x1="48" x2="510" y1="${v}" y2="${v}" stroke="var(--line)"/>`).join('')}
+          <g class="m-txt" font-size="11" fill="var(--muted)">
+            ${isKecView
+              ? ['400 jt','330 jt','260 jt','190 jt','120 jt'].map((t,i)=>`<text x="42" y="${24+i*35}" text-anchor="end" fill="var(--muted)">${t}</text>`).join('')
+              : ['1,4 M','1,2 M','1,0 M','0,8 M','0,6 M'].map((t,i)=>`<text x="40" y="${24+i*35}" text-anchor="end" fill="var(--muted)">${t}</text>`).join('')
+            }
+            ${['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep'].map((m,i)=>`<text x="${60+i*55}" y="186" text-anchor="middle" fill="var(--muted)">${m}</text>`).join('')}
+          </g>
+          <polygon points="60,160 ${pts(act)} 500,160" fill="var(--teal)" opacity=".12"/>
+          <polyline points="${pts(est)}" fill="none" stroke="var(--blue)" stroke-width="2" stroke-dasharray="6 5"/>
+          <polyline points="${pts(act)}" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="500" cy="${y(act[8])}" r="5" fill="var(--teal)" stroke="var(--surface)" stroke-width="2"/>
+        </svg>
+        <span class="note">September 2026: Realisasi ${isKecView ? 'Kec. ' + kd.short : 'Kota Denpasar'} Rp${isKecView ? '280 jt' : '1,00 M'}.</span>
+      </div>
+
+      <div class="card">
+        <h2>Pilihan Kecamatan &amp; Potensi</h2>
+        <div>
+          ${Object.keys(KECAMATAN_DATA).map(k=>{
+            const d = KECAMATAN_DATA[k];
+            const isSel = (f === k);
+            return `<button class="prio${isSel?' on':''}" data-act="drillKec" data-k="${k}" aria-pressed="${isSel}">
+              <span class="sq" style="background:${isSel?'var(--nav-active)':'var(--nav)'}">${d.short.substring(0,3).toUpperCase()}</span>
+              <span style="flex:1;display:flex;flex-direction:column;gap:3px">
+                <b style="font-weight:600">${k}</b>
+                <span class="sub">Potensi: ${d.potensi} &bull; Kasda: ${d.aktual}</span>
+                <span class="bar" style="height:5px"><i style="width:${d.cov}%"></i></span>
+              </span>
+              <span style="text-align:right;display:flex;flex-direction:column">
+                <span class="big">${d.open}</span>
+                <span class="sub">temuan</span>
+              </span>
+            </button>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="card w3">
+      <div class="cardhead">
+        <h2>Daftar Objek Terdaftar ${isKecView ? '· ' + kd.name : 'Seluruh Kota'}</h2>
+        <a href="#tindaklanjut" style="font-weight:600;font-size:13px;text-decoration:none">${openCount} temuan terbuka &rarr;</a>
+      </div>
+      <div class="tablewrap">
+        <table style="min-width:640px">
+          <thead><tr><th>ID</th><th>Kategori</th><th>Lokasi &amp; Ruas</th><th>Status</th><th>Pemeriksaan</th><th>Tindak Lanjut</th></tr></thead>
+          <tbody>
+            ${rows.map(r=>`<tr>
+              <td><a href="#objek/${r[0]}" class="linkbtn" style="font-weight:700">${r[0]}</a></td>
+              <td>${r[1]}</td>
+              <td><b>${r[2]}</b><br><span class="sub">${r[3]}</span></td>
+              <td>${chip(r[4])}</td>
+              <td class="sub">${r[5]} 2026</td>
+              <td>${r[6]}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card w2">
+      <h2>Komposisi Kategori Pajak ${isKecView ? '· ' + kd.short : ''}</h2>
+      ${cats.map(c=>`<div class="catrow"><b style="font-weight:600">${c[0]}</b><div class="bar"><i style="width:${c[2]}%;background:${c[3]}"></i></div><span class="num" style="text-align:right"><b>${c[1]}</b> <span class="sub">${c[2]}%</span></span></div>`).join('')}
+    </div>
+  </section>
+  <p class="foot">Sistem Peta Potensi Pendapatan Daerah · Bapenda Pemerintah Kota Denpasar.</p>`;
+}
+
+function initDashboardMap(){
+  const container = document.getElementById('dashMap');
+  if(!container) return;
+
+  const f = S.kec;
+  const isKecView = (f !== 'all' && KECAMATAN_DATA[f]);
+
+  dashMap = L.map('dashMap', {
+    center: isKecView ? KECAMATAN_DATA[f].center : DENPASAR_CENTER,
+    zoom: isKecView ? KECAMATAN_DATA[f].zoom : DENPASAR_ZOOM,
+    zoomControl: true,
+    scrollWheelZoom: true
+  });
+
+  dashTileLayer = L.tileLayer(OSM_TILE_URL, {
+    maxZoom: 19,
+    attribution: OSM_ATTRIBUTION
+  }).addTo(dashMap);
+
+  // Render 4 Kecamatan Polygons with click-to-redirect
+  Object.keys(KECAMATAN_DATA).forEach(k => {
+    const kd = KECAMATAN_DATA[k];
+    const isSelected = (f === k);
+    const isDimmed = (isKecView && !isSelected);
+
+    const poly = L.polygon(kd.coords, {
+      color: isSelected ? '#17806F' : (isDimmed ? '#8C9AA5' : '#0B7A6E'),
+      weight: isSelected ? 4 : 2,
+      fillColor: kd.fillColor,
+      fillOpacity: isSelected ? 0.45 : (isDimmed ? 0.08 : 0.25),
+      dashArray: isSelected ? null : '4 4'
+    }).addTo(dashMap);
+
+    poly.bindTooltip(`
+      <div style="font-family:var(--font);padding:2px">
+        <b style="font-size:13px">${kd.name}</b><br>
+        <span style="font-size:11px;color:#0B7A6E">Potensi: <b>${kd.potensi}</b> &bull; Temuan: <b>${kd.open}</b></span><br>
+        <small style="color:#555">&rarr; Klik untuk masuk detail kecamatan</small>
+      </div>
+    `, {sticky: true});
+
+    // Clicking polygon zooms in & redirects to this kecamatan!
+    poly.on('click', () => {
+      if (S.kec === k) {
+        // Toggle back to all if already clicked
+        go('dashboard', 'all');
+      } else {
+        go('dashboard', k);
+      }
+    });
+
+    dashKecLayers[k] = poly;
+  });
+
+  // Render Object Markers (filtered by kecamatan if selected)
+  S.objects.forEach(o => {
+    if (isKecView && o.kec !== f) return;
+
+    const marker = L.marker([o.lat, o.lng], {
+      icon: makePinIcon(o.sh, o.s, false),
+      title: `${o.id} - ${o.type}`
+    }).addTo(dashMap);
+
+    marker.bindPopup(`
+      <div style="min-width:200px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <b style="font-size:14px;color:var(--teal)">${o.id}</b>
+          ${chip(o.s)}
+        </div>
+        <div style="font-weight:700;font-size:13px">${o.type}</div>
+        <div class="sub" style="margin:4px 0 8px">${o.road}, ${o.kec}</div>
+        <div style="font-size:11px;color:var(--muted)">GPS: ${o.lat.toFixed(4)}, ${o.lng.toFixed(4)}</div>
+        <div style="margin-top:10px">
+          <a href="#objek/${o.id}" class="linkbtn">Lihat Profil Objek &rarr;</a>
+        </div>
+      </div>
+    `);
+  });
+
+  // Smooth fit bounds if kecamatan is selected
+  if (isKecView && dashKecLayers[f]) {
+    dashMap.fitBounds(dashKecLayers[f].getBounds(), { padding: [25, 25] });
+  }
+}
+
+/* ---------- VIEW: PENYISIRAN JALAN ---------- */
+function vPenyisiran(){
+  const objs = S.objects.filter(o => S.pinFilter === 'all' || o.cat === S.pinFilter);
+  const cur = S.objects.find(o => o.id === S.pinSel) || S.objects[0];
+  const pend = S.objects.filter(o => o.s === 'cek').length;
+
+  return `
+  <div class="head">
+    <div>
+      <div class="titlerow">
+        <h1>Penyisiran Ruas Jalan Denpasar</h1>
+        ${cityBadge}
+        ${ill}
+      </div>
+      <p>Tracking ruas jalan yang dilalui petugas, bukti jejak GPS, dan verifikasi objek pajak di lapangan</p>
+    </div>
+    <div class="grid-kpi" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));flex:1;max-width:640px">
+      <div class="kpi" style="padding:10px 14px"><span class="l">Segmen Diperiksa</span><span class="v" style="font-size:20px">34 / 50</span><div class="bar" style="height:5px"><i style="width:68%"></i></div></div>
+      <div class="kpi" style="padding:10px 14px"><span class="l">Temuan Baru</span><span class="v" style="font-size:20px">${27+S.svSent}</span></div>
+      <div class="kpi" style="padding:10px 14px"><span class="l">Perlu Verifikasi</span><span class="v warn" style="font-size:20px">${pend}</span></div>
+      <div class="kpi" style="padding:10px 14px"><span class="l">Tim Lapangan</span><span class="v" style="font-size:20px">3 tim aktif</span></div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="card w3" style="padding:16px">
+      <div class="cardhead">
+        <div class="pills" role="group" aria-label="Saring kategori">
+          ${[['all','Semua objek'],['rek','Reklame'],['pkr','Parkir'],['rst','Restoran']].map(p=>`<button data-act="pinf" data-k="${p[0]}" aria-pressed="${S.pinFilter===p[0]}">${p[1]}</button>`).join('')}
+        </div>
+        <span class="tag-map">MAP REAL GPS</span>
+      </div>
+
+      <div class="leaflet-map-frame">
+        <div id="penyisiranMap" style="height:480px;width:100%"></div>
+      </div>
+
+      <div class="legend-row">
+        <span><i class="ln" style="background:var(--teal);height:5px"></i>Ruas Selesai</span>
+        <span><i class="ln" style="background:var(--orange);height:5px"></i>Dilalui (Objek Belum Lengkap)</span>
+        <span><i style="width:20px;border-top:3px dashed var(--muted2)"></i>Belum Dilalui</span>
+        <span><i class="sw" style="background:var(--orange)"></i>Perlu verifikasi</span>
+        <span><i class="sw" style="background:var(--purple)"></i>Objek baru</span>
+        <span><i class="sw" style="background:#5E6E7A"></i>Belum diperiksa</span>
+        <span><i class="sw" style="background:var(--teal)"></i>Terverifikasi</span>
+      </div>
+    </div>
+
+    <aside class="card w1" aria-label="Detail objek terpilih">
+      <div class="cardhead">
+        <span class="lbl" style="color:var(--muted)">DETAIL OBJEK TERPILIH</span>
+        ${chip(cur.s)}
+      </div>
+      <div>
+        <div class="sub" style="font-size:13px">${cur.type}</div>
+        <div style="font-size:22px;font-weight:800">${cur.id}</div>
+      </div>
+      <div class="photo">
+        <div class="ph" style="background:var(--surface2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          ${svg('<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>', 32)}
+          <span style="font-size:11px;color:var(--muted)">[FOTO GEOTAGGING RESMI]</span>
+        </div>
+        <span class="cap">${cur.road} · ${cur.time}</span>
+      </div>
+      <dl class="kv">
+        <dt>Lokasi</dt><dd>${cur.road}</dd>
+        <dt>Wilayah</dt><dd>${cur.kec}</dd>
+        <dt>Segmen</dt><dd>${cur.seg}</dd>
+        <dt>Koordinat</dt><dd class="num">${cur.lat.toFixed(5)}, ${cur.lng.toFixed(5)}</dd>
+        <dt>Petugas</dt><dd>${cur.team}</dd>
+        <dt>${cur.k1}</dt><dd>${cur.v1}</dd>
+        <dt>${cur.k2}</dt><dd>${cur.v2}</dd>
+        <dt>Data Induk</dt><dd>${cur.match}</dd>
+      </dl>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn pri" data-act="verify" ${cur.s==='ok'?'disabled':''}>${cur.s==='ok'?'Sudah Terverifikasi':'Setujui Verifikasi Objek'}</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn out" style="flex:1" data-act="schedule">Kunjungan Ulang</button>
+          <button class="btn sec" style="flex:1" data-act="dup">Cek Duplikasi</button>
+        </div>
+        <a href="#objek/${cur.id}" class="linkbtn" style="text-align:center">Buka Lembar Profil Objek Lengkap &rarr;</a>
+      </div>
+    </aside>
+  </section>
+
+  <section class="card">
+    <div class="cardhead">
+      <h2>Daftar Tugas Segmen Ruas Jalan Kota Denpasar</h2>
+      <span class="note">Jejak GPS membuktikan ruas dilalui. Segmen selesai bila seluruh objek di ruas teridentifikasi.</span>
+    </div>
+    <div class="tablewrap">
+      <table style="min-width:720px">
+        <thead><tr><th>Segmen</th><th>Nama Ruas Jalan</th><th>Petugas</th><th>Jejak GPS</th><th>Objek Diperiksa</th><th>Status</th><th>Tenggat</th></tr></thead>
+        <tbody>
+          ${DENPASAR_SEGMENTS.map(s=>`<tr>
+            <td><b>${s.id}</b></td>
+            <td><b>${s.name}</b></td>
+            <td>${s.team}</td>
+            <td style="font-weight:600;color:${s.done>0?'var(--teal-ink)':'var(--muted)'}">${s.done>0?'Terekam GPS':'Belum ada'}</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="bar" style="width:90px;height:6px"><i style="width:${Math.round(s.done/s.total*100)}%"></i></div>
+                <span class="num">${s.done} / ${s.total}</span>
+              </div>
+            </td>
+            <td>${chip(s.status)}</td>
+            <td class="sub">${s.due} 2026</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <p class="foot">Penyisiran jalan dipetakan langsung pada jaringan jalan Kota Denpasar menggunakan Leaflet.js.</p>`;
+}
+
+function initPenyisiranMap(){
+  const container = document.getElementById('penyisiranMap');
+  if(!container) return;
+
+  penyisiranMap = L.map('penyisiranMap', {
+    center: [-8.668, 115.210],
+    zoom: 13,
+    zoomControl: true,
+    scrollWheelZoom: true
+  });
+
+  penyisiranTileLayer = L.tileLayer(OSM_TILE_URL, {
+    maxZoom: 19,
+    attribution: OSM_ATTRIBUTION
+  }).addTo(penyisiranMap);
+
+  // Render Denpasar Road Segments
+  DENPASAR_SEGMENTS.forEach(seg => {
+    let color = 'var(--muted2)', weight = 5, dash = '6 6';
+    if(seg.status === 'sdone') { color = '#0B7A6E'; weight = 6; dash = null; }
+    else if(seg.status === 'spart') { color = '#D2601A'; weight = 6; dash = null; }
+    else if(seg.status === 'srun') { color = '#2563B8'; weight = 5; dash = null; }
+
+    const poly = L.polyline(seg.coords, {
+      color: color,
+      weight: weight,
+      dashArray: dash,
+      opacity: 0.85
+    }).addTo(penyisiranMap);
+
+    poly.bindTooltip(`<b>${seg.id}</b>: ${seg.name}<br>${seg.done}/${seg.total} objek diperiksa`, {sticky: true});
+  });
+
+  // Render Object Pins
+  const objs = S.objects.filter(o => S.pinFilter === 'all' || o.cat === S.pinFilter);
+  penyisiranPins = {};
+
+  objs.forEach(o => {
+    const isSel = (o.id === S.pinSel);
+    const marker = L.marker([o.lat, o.lng], {
+      icon: makePinIcon(o.sh, o.s, isSel),
+      zIndexOffset: isSel ? 1000 : 0
+    }).addTo(penyisiranMap);
+
+    marker.on('click', () => {
+      S.pinSel = o.id;
+      render();
+    });
+
+    penyisiranPins[o.id] = marker;
+  });
+
+  const cur = S.objects.find(o => o.id === S.pinSel);
+  if(cur) {
+    penyisiranMap.panTo([cur.lat, cur.lng]);
+  }
+}
+
+/* ---------- VIEW: DATA OBJEK (DINAMIS) ---------- */
+function vObjek(targetId){
+  const objId = targetId || S.pinSel || 'P-003';
+  const cur = S.objects.find(o => o.id === objId) || S.objects[0];
+  const occ=[['Sen',54],['Sel',52],['Rab',57],['Kam',58],['Jum',66],['Sab',79],['Min',75]];
+  const hist=[
+    ['15 Sep 2026','var(--teal)','Status diubah: Perlu verifikasi &rarr; Terverifikasi','Verifikator Bapenda · bukti 3 foto dan lembar survei'],
+    ['07 Sep 2026','var(--blue)','Pengamatan 7 hari selesai, kapasitas diperbarui','Tim B · aplikasi petugas'],
+    ['02 Sep 2026','var(--purple)','Dicocokkan dengan data perizinan DPMPTSP Denpasar','Sistem integrasi daerah'],
+    ['18 Jun 2025','var(--muted2)','Data awal registrasi objek diimpor','Database objek pajak 2025']
+  ];
+  const kids=[
+    ['Parkir Level 21 Mall','P-003','Parkir','Objek ini','teal',1],
+    ['Food Court Lantai 3','K-011','Restoran','Terverifikasi','teal'],
+    ['Kafe Fasad Depan','K-012','Restoran','Perlu verifikasi','orange'],
+    ['Videotron Fasad Barat','R-040','Reklame','Terverifikasi','teal'],
+    ['Neon Box Pintu Masuk','R-041','Reklame','Objek baru','purple']
+  ];
+
+  return `
+  <div>
+    <div class="crumb"><a href="#dashboard">Dashboard Denpasar</a> / <a href="#penyisiran">Data Objek</a> / <b>${cur.id}</b></div>
+    <div class="head">
+      <div>
+        <div class="titlerow">
+          <h1>${cur.type} · ${cur.id}</h1>
+          ${cityBadge}
+          ${ill}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          ${chip(cur.s)}
+          <span class="chip grey">${cur.road} · ${cur.kec}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <label class="field" style="min-width:180px">Pilih Objek Lain
+          <select data-act="pickObj">
+            ${S.objects.map(o=>`<option value="${o.id}" ${o.id===cur.id?'selected':''}>${o.id} - ${o.type}</option>`).join('')}
+          </select>
+        </label>
+        <button class="btn sec" data-act="toast" data-msg="Data objek berhasil diekspor (PDF/Excel)">Ekspor Profil</button>
+        <button class="btn pri" data-act="toast" data-msg="Usulan pembaruan diajukan ke Bapenda Denpasar">Ajukan Perubahan</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="w3" style="display:flex;flex-direction:column;gap:16px;flex:2 1 520px">
+      <section class="card">
+        <h2>Identitas Objek &amp; Geospasial</h2>
+        <dl class="kv" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 24px">
+          <div><dt class="sub">Nama Objek</dt><dd style="margin:2px 0 0">${cur.type}</dd></div>
+          <div><dt class="sub">ID Objek</dt><dd style="margin:2px 0 0">${cur.id}</dd></div>
+          <div><dt class="sub">Koordinat GPS</dt><dd style="margin:2px 0 0">${cur.lat.toFixed(6)}, ${cur.lng.toFixed(6)}</dd></div>
+          <div><dt class="sub">Alamat Lengkap</dt><dd style="margin:2px 0 0">${cur.road}, ${cur.kec}, Kota Denpasar</dd></div>
+          <div><dt class="sub">Segmen Penyisiran</dt><dd style="margin:2px 0 0">${cur.seg} · Petugas: ${cur.team}</dd></div>
+          <div><dt class="sub">Status Sinkronisasi</dt><dd style="margin:2px 0 0">${cur.match}</dd></div>
+        </dl>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px">
+          <div class="ph">[Foto Fasad &amp; Akses Masuk]</div>
+          <div class="ph">[Foto Papan Identitas / Izin]</div>
+          <div class="ph">[Foto Bukti Lapangan Petugas]</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardhead">
+          <h2>Parameter Operasional &amp; Pengamatan</h2>
+          <span class="note">Mencatat kapasitas, omzet pengamatan, dan okupansi periodik</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px">
+          <div class="mini"><span class="sub">${cur.k1}</span><span class="v" style="font-size:18px">${cur.v1}</span></div>
+          <div class="mini"><span class="sub">${cur.k2}</span><span class="v" style="font-size:18px">${cur.v2}</span></div>
+          <div class="mini"><span class="sub">Waktu Catat</span><span class="v" style="font-size:16px">${cur.time}</span></div>
+          <div class="mini"><span class="sub">Okupansi Rata-rata</span><span class="v">63%</span></div>
+        </div>
+        <span class="sub" style="font-weight:600">Pola aktivitas harian hasil survei lapangan</span>
+        <div class="occ">
+          ${occ.map(o=>`<div><b class="num" style="font-weight:700;background:none;height:auto">${o[1]}%</b><b style="height:${Math.round(o[1]*.9)}px;background:${o[1]>=70?'var(--teal)':'var(--sur2)'}"></b><span class="sub">${o[0]}</span></div>`).join('')}
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Riwayat Verifikasi &amp; Audit Trail</h2>
+        <ol class="timeline">
+          ${hist.map(h=>`<li><span class="d num">${h[0]}</span><span class="b" style="background:${h[1]}"></span><div><b style="font-weight:600">${h[2]}</b><div class="sub">${h[3]}</div></div></li>`).join('')}
+        </ol>
+      </section>
+    </div>
+
+    <div class="w1" style="display:flex;flex-direction:column;gap:16px;flex:1 1 340px">
+      <section class="card">
+        <h2>Kalkulasi Nilai PAD Objek</h2>
+        <div class="tier pot">
+          <span class="t">POTENSI EKONOMI</span>
+          <span class="v" style="font-size:22px">Rp1,9 M <span class="sub">/ thn</span></span>
+          <p>Kapasitas terpasang &times; okupansi pengamatan, disetahunkan.</p>
+        </div>
+        <div class="tier est">
+          <span class="t">ESTIMASI PENERIMAAN PAD</span>
+          <span class="v" style="font-size:22px">Rp380 jt <span class="sub">/ thn</span></span>
+          <p>Perhitungan tarif resmi Perda Pajak Daerah Kota Denpasar.</p>
+        </div>
+        <div class="tier act">
+          <span class="t">REALISASI KASDA</span>
+          <span class="v" style="font-size:22px">Rp214 jt <span class="sub">Jan – Sep 2026</span></span>
+          <p>Tercatat masuk kas daerah Kota Denpasar.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Kawasan Terkait &amp; Hubungan Objek</h2>
+        <div class="parent">
+          ${svg('<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>')}
+          <div><b>Level 21 Mall Denpasar</b><div style="font-size:12px;color:var(--nav-muted)">Sentra Komersial · Jl. Teuku Umar</div></div>
+        </div>
+        <ul class="tree">
+          ${kids.map(k=>`<li class="${k[0].includes(cur.id)?'me':''}"><span><b style="font-weight:600">${k[0]}</b><br><span class="sub">${k[1]} · ${k[2]}</span></span><span class="chip ${k[4]}">${k[3]}</span></li>`).join('')}
+        </ul>
+      </section>
+    </div>
+  </div>
+  <p class="foot">Data profil objek pajak dan retribusi daerah Kota Denpasar.</p>`;
+}
+
+/* ---------- VIEW: TINDAK LANJUT ---------- */
+const STAGE={ver:1, tl:2, late:2, done:4};
+const CTA={ver:'Setujui Hasil Verifikasi', tl:'Catat Penyelesaian', late:'Catat Penyelesaian', done:'Selesai'};
+
+function vTindak(){
+  const F={all:()=>true, open:d=>d.s!=='done', late:d=>d.s==='late', done:d=>d.s==='done'};
+  const q=S.tlQuery.trim().toLowerCase();
+  const list=S.findings.filter(F[S.tlTab]).filter(d=>!q||(d.id+' '+d.obj+' '+d.oid+' '+d.kind+' '+d.kec).toLowerCase().includes(q));
+  const cur=S.findings.find(d=>d.id===S.tlSel)||S.findings[0];
+  const open=S.findings.filter(d=>d.s!=='done').length, done=S.findings.filter(d=>d.s==='done').length;
+  const labels=['Temuan dicatat dengan koordinat & foto GPS','Bukti diperiksa verifikator Bapenda','Petugas menyelesaikan tindakan di lapangan','Status objek diperbarui di sistem','Penerimaan ditautkan ke kasda'];
+  const stg=STAGE[cur.s];
+  const flow=[
+    ['Data awal & peta','1.240','objek tercatat'],
+    ['Segmen Denpasar','50','ruas prioritas'],
+    ['Survei & bukti',fmt(312+S.svSent),'temuan lapangan'],
+    ['Cocokkan & verifikasi',fmt(186+S.svSent),'antrean verifikasi'],
+    ['Tindak lanjut petugas','112','berjalan'],
+    ['Pantau kasda','74','tertaut resmi']
+  ];
+
+  return `
+  <div class="head">
+    <div>
+      <div class="titlerow">
+        <h1>Tindak Lanjut Temuan Lapangan</h1>
+        ${cityBadge}
+        ${ill}
+      </div>
+      <p>Penyelesaian temuan penyisiran jalan Denpasar dengan akuntabilitas bukti foto, penanggung jawab, dan tenggat</p>
+    </div>
+  </div>
+
+  <section class="flow" aria-label="Alur tindak lanjut">
+    ${flow.map((f,i)=>`<div class="${i===3?'hl':''}"><span class="k">TAHAP ${i+1}</span><b>${f[0]}</b><span class="n">${f[1]}</span><span class="u">${f[2]}</span></div>`).join('')}
+  </section>
+
+  <section class="row">
+    <div class="card w3" style="flex:3 1 560px">
+      <div class="cardhead">
+        <div class="seg" role="group" aria-label="Saring status">
+          ${[['all','Semua',S.findings.length],['open','Terbuka',open],['late','Lewat tenggat',S.findings.filter(F.late).length],['done','Selesai',done]].map(t=>`<button data-act="tltab" data-k="${t[0]}" aria-pressed="${S.tlTab===t[0]}">${t[1]} <span class="num" style="opacity:.7">${t[2]}</span></button>`).join('')}
+        </div>
+        <label class="search" for="tlq">
+          ${svg('<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',16)}
+          <input id="tlq" type="search" placeholder="Cari ID, jalan, atau kecamatan" value="${S.tlQuery}" data-act="tlq">
+        </label>
+      </div>
+
+      <div class="tablewrap">
+        <table style="min-width:880px">
+          <thead><tr><th>ID</th><th>Objek &amp; Wilayah</th><th>Jenis Temuan</th><th>Petugas</th><th>Tenggat</th><th>Bukti</th><th>Status</th></tr></thead>
+          <tbody>
+            ${list.length?list.map(d=>`<tr class="${d.id===cur.id?'sel':''}">
+              <td><button class="linkbtn" data-act="tlsel" data-k="${d.id}">${d.id}</button></td>
+              <td><b style="font-weight:600">${d.obj}</b><div class="sub">${d.oid} · ${d.kec}</div></td>
+              <td>${d.kind}</td>
+              <td>${d.team}</td>
+              <td style="font-weight:600;color:${d.s==='late'?'var(--orange-ink)':'inherit'}">${d.due}</td>
+              <td class="num">${d.ev} berkas</td>
+              <td>${chip(d.s)}</td>
+            </tr>`).join(''):`<tr><td colspan="7" class="sub" style="padding:24px;text-align:center">Tidak ada temuan yang cocok.</td></tr>`}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <aside class="card w1" aria-label="Detail temuan">
+      <div class="cardhead">
+        <span class="lbl" style="color:var(--muted)">${cur.id}</span>
+        ${chip(cur.s)}
+      </div>
+      <div>
+        <div style="font-size:18px;font-weight:800">${cur.kind}</div>
+        <div class="sub" style="font-size:13px">${cur.obj} (${cur.oid}) · ${cur.kec}</div>
+      </div>
+      <dl class="kv" style="grid-template-columns:100px 1fr">
+        <dt>Penanggung Jawab</dt><dd>${cur.team}</dd>
+        <dt>Verifikator</dt><dd>Bapenda Denpasar</dd>
+        <dt>Tenggat</dt><dd style="color:${cur.s==='late'?'var(--orange-ink)':'inherit'}">${cur.due}</dd>
+        <dt>Hasil Tindakan</dt><dd>${cur.res}</dd>
+      </dl>
+      <div class="steps">
+        <span class="lbl" style="color:var(--muted);margin-bottom:6px">PROGRES TAHAP</span>
+        ${labels.map((l,i)=>{const done=stg===4||i<stg,now=i===stg&&stg!==4;return `<div class="step ${done?'done':now?'now':'todo'}"><i>${done?'✓':''}</i><span>${l}</span></div>`}).join('')}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn pri" data-act="advance" ${cur.s==='done'?'disabled':''}>${CTA[cur.s]}</button>
+        <button class="btn sec" data-act="evidence">Tambah Bukti Lapangan</button>
+      </div>
+    </aside>
+  </section>
+  <p class="foot">Seluruh status temuan terhubung dengan audit trail penerimaan daerah Kota Denpasar.</p>`;
+}
+
+/* ---------- VIEW: KOMODITAS ---------- */
+function vKomoditas(){
+  const c = KOM[S.kom];
+  const KECS = ['Denpasar Barat', 'Denpasar Selatan', 'Denpasar Timur', 'Denpasar Utara'];
+  const max = Math.max(...c.p, ...c.k);
+  const tp = c.p.reduce((a,b)=>a+b), tk = c.k.reduce((a,b)=>a+b), bal = tp - tk;
+  const m = KECS.map((k,i)=>{
+    const d = c.p[i] - c.k[i];
+    return { name: k, d: d, label: (d>=0?'+':'−') + fmt(Math.abs(d)) + ' t' };
+  });
+
+  return `
+  <div class="head">
+    <div>
+      <div class="titlerow">
+        <h1>Produksi &amp; Kebutuhan Komoditas Pangan</h1>
+        ${cityBadge}
+        ${ill}
+      </div>
+      <p>Pemetaan neraca pasokan pangan dan arus distribusi antar-kecamatan Kota Denpasar</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+      <div class="field">Pilihan Komoditas
+        <div class="seg" role="group" aria-label="Pilih komoditas">
+          ${Object.keys(KOM).map(k=>`<button data-act="kom" data-k="${k}" aria-pressed="${S.kom===k}">${KOM[k].label}</button>`).join('')}
+        </div>
+      </div>
+      <label class="field" for="kper">Periode
+        <select id="kper"><option>September 2026</option><option>Agustus 2026</option></select>
+      </label>
+      <div class="field">Satuan<span class="input" style="display:flex;align-items:center;background:var(--surface2)">ton / bulan</span></div>
+    </div>
+  </div>
+
+  <section class="grid-kpi">
+    <div class="kpi"><span class="l">Total Produksi Denpasar</span><span class="v">${fmt(tp)} <span class="sub">t/bln</span></span></div>
+    <div class="kpi"><span class="l">Total Konsumsi &amp; Usaha</span><span class="v">${fmt(tk)} <span class="sub">t/bln</span></span></div>
+    <div class="kpi"><span class="l">Neraca Kota Denpasar</span><span class="v" style="color:${bal>=0?'var(--blue-ink)':'var(--orange-ink)'}">${bal>=0?'Surplus':'Defisit'} ${fmt(Math.abs(bal))} t</span></div>
+    <div class="kpi"><span class="l">Kecamatan Defisit Pasokan</span><span class="v">${m.filter(x=>x.d<0).length} <span class="sub">dari 4</span></span></div>
+  </section>
+
+  <section class="row">
+    <div class="card" style="flex:1 1 440px">
+      <div class="cardhead">
+        <h2>Peta Geospasial Neraca Komoditas &amp; Arus Pasokan</h2>
+        <span class="tag-map">MAP REAL LEAFLET</span>
+      </div>
+      <div class="leaflet-map-frame">
+        <div id="komoditasMap" style="height:420px;width:100%"></div>
+      </div>
+      <div class="legend-row">
+        <span><i class="sw" style="background:var(--teal)"></i>Kecamatan Surplus</span>
+        <span><i class="sw" style="background:var(--orange)"></i>Kecamatan Defisit</span>
+        <span><i style="width:20px;border-top:3px dashed var(--ink)"></i>Arah Rekomendasi Distribusi</span>
+      </div>
+    </div>
+
+    <div class="card" style="flex:1 1 440px">
+      <div class="cardhead">
+        <h2>Produksi vs Kebutuhan Konsumsi · ${c.label}</h2>
+        <span class="note">ton/bulan · September 2026</span>
+      </div>
+      <div class="bars">
+        ${KECS.map((n,i)=>{
+          const hk = c.k[i] / max * 200;
+          return `<div>
+            <div class="col"><span class="num">${fmt(c.p[i])}</span><i class="p" style="height:${Math.round(c.p[i]/max*200)}px"></i></div>
+            <div class="col"><span class="num">${fmt(c.k[i])}</span><span class="stack"><i class="u" style="height:${Math.round(hk*c.biz)}px"></i><i class="r" style="height:${Math.round(hk*(1-c.biz))}px"></i></span></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="barlabels">
+        ${m.map(x=>`<div><b style="font-weight:600">${x.name.replace('Kecamatan ','')}</b><div style="font-weight:700;color:${x.d>=0?'var(--blue-ink)':'var(--orange-ink)'}">${x.label}</div></div>`).join('')}
+      </div>
+      <div class="legend-row">
+        <span><i class="sw" style="border-radius:2px;background:var(--teal)"></i>Produksi Lokal</span>
+        <span><i class="sw" style="border-radius:2px;background:var(--orange)"></i>Konsumsi Rumah Tangga</span>
+        <span><i class="sw" style="border-radius:2px;background:var(--def2)"></i>Pembelian Hotel / Resto (${Math.round(c.biz*100)}%)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="card w3">
+      <h2>Peluang &amp; Rekomendasi Distribusi Pangan</h2>
+      ${c.recs.map(r=>`<div class="rec">
+        <div style="min-width:130px"><div class="sub">Wilayah Surplus</div><b style="font-size:15px;color:var(--blue-ink)">${r[0]}</b></div>
+        <div class="mid"><b class="num">${fmt(r[2])} ton/bulan</b><hr><span class="sub" style="text-align:center">${r[3]}</span></div>
+        <div style="min-width:130px;text-align:right"><div class="sub">Wilayah Defisit</div><b style="font-size:15px;color:var(--orange-ink)">${r[1]}</b></div>
+      </div>`).join('')}
+      <div class="info">
+        ${svg('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>')}
+        <span>Arus distribusi menghubungkan lumbung pangan Denpasar Utara/Timur dengan sentra konsumsi pariwisata Denpasar Barat &amp; Selatan untuk menjaga stabilitas harga pangan.</span>
+      </div>
+    </div>
+
+    <div class="card w2">
+      <h2>Pelaku Utama Rantai Pasok Denpasar</h2>
+      <span class="lbl" style="color:var(--teal-ink)">PRODUSEN &amp; KELOMPOK TANI / NELAYAN</span>
+      ${c.prod.map(p=>`<div class="actor"><span><b style="font-weight:600">${p[0]}</b><div class="sub">${p[1]}</div></span><b class="num">${p[2]}</b></div>`).join('')}
+      <span class="lbl" style="color:var(--orange-ink);margin-top:8px">PEMBELI, PASAR &amp; SENTRA KULINER</span>
+      ${c.buy.map(p=>`<div class="actor"><span><b style="font-weight:600">${p[0]}</b><div class="sub">${p[1]}</div></span><b class="num">${p[2]}</b></div>`).join('')}
+    </div>
+  </section>
+  <p class="foot">Data komoditas pangan Kota Denpasar.</p>`;
+}
+
+function initKomoditasMap(){
+  const container = document.getElementById('komoditasMap');
+  if(!container) return;
+
+  komoditasMap = L.map('komoditasMap', {
+    center: DENPASAR_CENTER,
+    zoom: 12,
+    zoomControl: true,
+    scrollWheelZoom: true
+  });
+
+  komoditasTileLayer = L.tileLayer(OSM_TILE_URL, {
+    maxZoom: 19,
+    attribution: OSM_ATTRIBUTION
+  }).addTo(komoditasMap);
+
+  const c = KOM[S.kom];
+  const KECS = ['Denpasar Barat', 'Denpasar Selatan', 'Denpasar Timur', 'Denpasar Utara'];
+
+  KECS.forEach((k, idx) => {
+    const kd = KECAMATAN_DATA[k];
+    const diff = c.p[idx] - c.k[idx];
+    const isSurplus = diff >= 0;
+    const color = isSurplus ? '#0B7A6E' : '#D2601A';
+
+    const poly = L.polygon(kd.coords, {
+      color: color,
+      weight: 2,
+      fillColor: color,
+      fillOpacity: isSurplus ? 0.3 : 0.25
+    }).addTo(komoditasMap);
+
+    poly.bindTooltip(`<b>${k}</b><br>${isSurplus ? 'Surplus' : 'Defisit'}: ${fmt(Math.abs(diff))} ton/bln`, {permanent: true, direction: 'center', className: 'map-tag'});
+  });
+
+  c.recs.forEach(r => {
+    const fromK = KECAMATAN_DATA[r[0]], toK = KECAMATAN_DATA[r[1]];
+    if(fromK && toK) {
+      const line = L.polyline([fromK.center, toK.center], {
+        color: 'var(--ink)',
+        weight: 3,
+        dashArray: '6 6',
+        opacity: 0.9
+      }).addTo(komoditasMap);
+
+      line.bindTooltip(`Arus Pasokan: ${r[2]} t/bln`, {sticky: true});
+    }
+  });
+}
+
+/* ---------- VIEW: SURVEI FORMULIR PETUGAS ---------- */
+const SV={
+  rek:{label:'Reklame',name:'Billboard Tepi Jalan Teuku Umar',l:[['Ukuran (m)','4 × 8'],['Jumlah sisi','2'],['Masa pemasangan','Belum terdaftar']],note:'Konstruksi tiang tunggal di depan ruko, tidak ditemukan stiker tanda izin Bapenda.'},
+  pkr:{label:'Parkir',name:'Parkir Tepi Pertokoan Jl. Gajah Mada',l:[['Kapasitas motor','40'],['Kapasitas mobil','12'],['Periode pengamatan','08.00–17.00, 2 hari']],note:'Ada juru parkir mengenakan rompi, karcis retribusi resmi tidak diberikan ke pengunjung.'},
+  rst:{label:'Restoran',name:'Rumah Makan Khas Bali Baru',l:[['Jumlah kursi','± 60'],['Jam buka','10.00–22.00'],['Layanan','Dine-in & Online']],note:'Usaha baru buka Agustus 2026, papan nama sudah permanen namun belum terdata NPWPD.'},
+  lain:{label:'Lainnya',name:'',l:[['Jenis usaha',''],['Skala omzet',''],['Keterangan khusus','']],note:'Perlu verifikasi kewenangan Kota Denpasar vs Provinsi Bali.'}
+};
+
+function vSurvei(){
+  const f = SV[S.svCat], pct = Math.round(S.svDone/9*100);
+  const sent = S.findings.filter(d => d.fresh);
+
+  return `
+  <div class="head">
+    <div>
+      <div class="titlerow">
+        <h1>Aplikasi Mobile Petugas Lapangan</h1>
+        ${cityBadge}
+        ${ill}
+      </div>
+      <p>Formulir ponsel untuk geotagging objek saat penyisiran segmen jalan. Setiap temuan langsung masuk antrean verifikasi.</p>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content:center">
+    <form class="phone" id="svForm" novalidate>
+      <header>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a href="#penyisiran" class="btn" style="min-height:40px;width:40px;padding:0;background:var(--nav2);color:#fff" aria-label="Kembali ke peta penyisiran">${svg('<path d="m15 18-6-6 6-6"/>',18)}</a>
+          <div style="flex:1">
+            <b style="font-size:16px">Penyisiran Lapangan</b>
+            <div style="font-size:11px;color:var(--nav-muted)">Segmen U-07 · Jl. Teuku Umar Barat · Tim A</div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--nav-ink)">
+            <span>Target objek segmen U-07</span>
+            <b style="color:#fff">${S.svDone} / 9 objek</b>
+          </div>
+          <div class="bar" style="height:5px;margin-top:5px;background:var(--nav2)"><i style="width:${pct}%;background:#5FD3C2"></i></div>
+        </div>
+      </header>
+
+      <div class="body">
+        <div class="gps">
+          <div style="width:48px;height:48px;border-radius:8px;background:var(--map-block);position:relative;flex:none;overflow:hidden">
+            <i style="position:absolute;left:0;right:0;top:20px;height:8px;background:var(--road)"></i>
+            <i style="position:absolute;left:0;width:30px;top:22px;height:4px;background:var(--teal)"></i>
+            <i style="position:absolute;left:24px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--orange);border:2px solid var(--surface)"></i>
+          </div>
+          <div>
+            <b style="color:var(--teal-ink);font-size:13px">Lokasi GPS Terkunci (&plusmn; 4 m)</b>
+            <div class="sub">Lat: -8.6748, Long: 115.2045 · Jl. Teuku Umar Barat No. 88, Denpasar</div>
+          </div>
+        </div>
+
+        <div class="alert">
+          ${svg('<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>')}
+          <div>
+            <b>1 objek serupa terdaftar radius 20 m:</b>
+            <div>R-015 · Papan nama toko (terdaftar 2023)</div>
+            <button type="button" class="linkbtn" style="color:var(--orange-ink);font-size:12px" data-act="toast" data-msg="R-015 beda titik tiang, bukan duplikasi">Bandingkan sebelum menyimpan</button>
+          </div>
+        </div>
+
+        <fieldset style="border:0;margin:0;padding:0">
+          <legend style="font-weight:700;font-size:12px;margin-bottom:6px;padding:0">Kategori Objek Pajak</legend>
+          <div class="catgrid">
+            ${Object.keys(SV).map(k=>`<button type="button" data-act="svcat" data-k="${k}" aria-pressed="${S.svCat===k}">${SV[k].label}</button>`).join('')}
+          </div>
+        </fieldset>
+
+        <label for="svName">Nama / Keterangan Objek
+          <input class="input" id="svName" value="${f.name}" placeholder="Contoh: Billboard depan ruko">
+        </label>
+
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+          <label for="sv1">${f.l[0][0]}<input class="input" id="sv1" value="${f.l[0][1]}"></label>
+          <label for="sv2">${f.l[1][0]}<input class="input" id="sv2" value="${f.l[1][1]}"></label>
+        </div>
+
+        <label for="sv3">${f.l[2][0]}<input class="input" id="sv3" value="${f.l[2][1]}"></label>
+        <label for="svOwner">Pengelola / Wajib Pajak <span class="sub">Opsional</span>
+          <input class="input" id="svOwner" placeholder="Nama pemilik atau pengelola">
+        </label>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <b style="font-size:12px">Foto Bukti Lapangan <span class="sub">&middot; Geotagging otomatis</span></b>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+            <div class="ph" style="aspect-ratio:1">[Foto 1]</div>
+            <div class="ph" style="aspect-ratio:1">[Foto 2]</div>
+            <label for="svPhoto" class="ph" style="aspect-ratio:1;border:2px dashed var(--muted2);background:var(--surface);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:4px">
+              ${svg('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/>',20)}
+              <span style="font-size:10px">Ambil</span>
+              <input id="svPhoto" type="file" accept="image/*" hidden>
+            </label>
+          </div>
+        </div>
+
+        <label for="svNote">Catatan Petugas
+          <textarea class="input" id="svNote" rows="2" style="resize:none">${f.note}</textarea>
+        </label>
+
+        ${S.svErr ? `<p class="err" role="alert" style="margin:0">${S.svErr}</p>` : ''}
+      </div>
+
+      <footer>
+        <button type="button" class="btn sec" style="flex:1" data-act="toast" data-msg="Draf tersimpan offline di ponsel">Simpan Draf</button>
+        <button type="submit" class="btn pri" style="flex:2">Kirim Temuan</button>
+      </footer>
+    </form>
+
+    <div class="card" style="flex:1 1 300px;max-width:400px">
+      <h2>Temuan Terkirim Sesi Ini</h2>
+      ${sent.length
+        ? sent.map(d=>`<div class="actor"><span><b style="font-weight:600">${d.id} · ${d.obj}</b><div class="sub">${d.kind} · ${d.team}</div></span>${chip(d.s)}</div>`).join('')+`<a class="btn out" href="#tindaklanjut" style="margin-top:10px">Buka di Tindak Lanjut &rarr;</a>`
+        : `<p class="sub" style="margin:0">Belum ada temuan baru. Kirim formulir untuk langsung mencatat temuan ke antrean verifikasi Bapenda Kota Denpasar.</p>`
+      }
+      <div class="info" style="margin-top:12px">
+        ${svg('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>')}
+        <span>Jejak GPS segmen aktif membuktikan keaslian lokasi saat petugas mengisi survei di lapangan.</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- ROUTING & RENDER ENGINE ---------- */
+const VIEWS = {
+  dashboard: vDashboard,
+  penyisiran: vPenyisiran,
+  objek: vObjek,
+  tindaklanjut: vTindak,
+  komoditas: vKomoditas,
+  survei: vSurvei
+};
+
+const nav = document.getElementById('nav');
+const view = document.getElementById('view');
+
+function renderNav(){
+  nav.innerHTML = PAGES.map(p => `
+    <a href="#${p[0]}" ${S.page === p[0] ? 'aria-current="page"' : ''}>
+      ${svg(ICON[p[0]])}
+      <span>${p[1]}</span>
+    </a>
+  `).join('');
+}
+
+function render(keepFocus){
+  let fid = null, pos = null;
+  if (keepFocus) {
+    const a = document.activeElement;
+    if (a && a.id) { fid = a.id; pos = a.selectionStart; }
+  }
+
+  cleanupMaps();
+  view.innerHTML = VIEWS[S.page](S.routeParam);
+  renderNav();
+
+  if (S.page === 'dashboard') {
+    setTimeout(initDashboardMap, 50);
+  } else if (S.page === 'penyisiran') {
+    setTimeout(initPenyisiranMap, 50);
+  } else if (S.page === 'komoditas') {
+    setTimeout(initKomoditasMap, 50);
+  }
+
+  if (fid) {
+    const el = document.getElementById(fid);
+    if (el) {
+      el.focus();
+      try { el.setSelectionRange(pos, pos); } catch(e){}
+    }
+  }
+}
+
+function go(p, param, scroll){
+  if (!VIEWS[p]) p = 'dashboard';
+  S.page = p;
+  S.routeParam = param || null;
+  if (p === 'dashboard') {
+    S.kec = (param && KECAMATAN_DATA[param]) ? param : 'all';
+  }
+  render();
+  if (scroll !== false) {
+    window.scrollTo(0, 0);
+    view.focus({preventScroll:true});
+  }
+}
+
+function fromHash(){
+  const raw = (location.hash || '').replace('#', '');
+  const parts = raw.split('/');
+  const p = parts[0] || 'dashboard';
+  let param = parts[1] || null;
+  if (param) param = decodeURIComponent(param);
+  go(VIEWS[p] ? p : 'dashboard', param);
+}
+
+window.addEventListener('hashchange', fromHash);
+
+/* ---------- EVENT LISTENERS ---------- */
+document.addEventListener('click', e => {
+  const tBtn = e.target.closest('.theme-btn');
+  if (tBtn) {
+    applyTheme(tBtn.dataset.themeVal);
+    return;
+  }
+
+  const t = e.target.closest('[data-act]');
+  if (!t) return;
+  const a = t.dataset.act, k = t.dataset.k;
+
+  if (a === 'drillKec') {
+    if (k === 'all') {
+      location.hash = 'dashboard';
+    } else {
+      location.hash = 'dashboard/' + encodeURIComponent(k);
+    }
+  } else if (a === 'pinf') {
+    S.pinFilter = k;
+    render();
+  } else if (a === 'verify') {
+    const o = S.objects.find(o => o.id === S.pinSel);
+    if(o) {
+      o.s = 'ok';
+      o.match = 'Diverifikasi Bapenda Denpasar';
+      toast(o.id + ' berhasil diverifikasi');
+      render();
+    }
+  } else if (a === 'schedule') {
+    toast('Kunjungan verifikasi ulang dijadwalkan untuk ' + S.pinSel);
+  } else if (a === 'dup') {
+    toast(S.pinSel + ' dikirim ke sistem untuk pemeriksaan duplikasi');
+  } else if (a === 'tltab') {
+    S.tlTab = k;
+    render();
+  } else if (a === 'tlsel') {
+    S.tlSel = k;
+    render();
+  } else if (a === 'advance') {
+    const d = S.findings.find(d => d.id === S.tlSel);
+    if (d) {
+      if (d.s === 'ver') {
+        d.s = 'tl';
+        toast(d.id + ': verifikasi disetujui, diteruskan ke petugas');
+      } else if (d.s === 'tl' || d.s === 'late') {
+        d.s = 'done';
+        d.res = 'Diselesaikan · penerimaan kasda tertaut';
+        toast(d.id + ' ditandai selesai');
+      }
+      render();
+    }
+  } else if (a === 'evidence') {
+    const d = S.findings.find(d => d.id === S.tlSel);
+    if (d) {
+      d.ev++;
+      toast('Bukti foto lapangan ditambahkan ke ' + d.id);
+      render();
+    }
+  } else if (a === 'kom') {
+    S.kom = k;
+    render();
+  } else if (a === 'svcat') {
+    S.svCat = k;
+    S.svErr = '';
+    render();
+  } else if (a === 'toast') {
+    toast(t.dataset.msg);
+  }
+});
+
+document.addEventListener('input', e => {
+  if (e.target.dataset.act === 'tlq') {
+    S.tlQuery = e.target.value;
+    render(true);
+  }
+});
+
+document.addEventListener('change', e => {
+  if (e.target.dataset.act === 'kec') {
+    if (e.target.value === 'all') {
+      location.hash = 'dashboard';
+    } else {
+      location.hash = 'dashboard/' + encodeURIComponent(e.target.value);
+    }
+  }
+  if (e.target.dataset.act === 'pickObj') {
+    location.hash = 'objek/' + e.target.value;
+  }
+  if (e.target.id === 'svPhoto' && e.target.files.length) {
+    toast('Foto terlampir: ' + e.target.files[0].name);
+  }
+});
+
+document.addEventListener('submit', e => {
+  if (e.target.id !== 'svForm') return;
+  e.preventDefault();
+  const name = document.getElementById('svName').value.trim();
+  if (!name) {
+    S.svErr = 'Isi nama atau keterangan objek sebelum mengirim.';
+    render();
+    document.getElementById('svName').focus();
+    return;
+  }
+  S.svErr = '';
+  const id = 'TL-' + S.nextTL++;
+  
+  S.findings.unshift({
+    id: id,
+    obj: name,
+    oid: 'Baru',
+    kec: 'Denpasar Barat',
+    kind: SV[S.svCat].label + ' baru dari penyisiran',
+    team: 'Tim A',
+    due: '12 Okt 2026',
+    ev: 2,
+    s: 'ver',
+    res: '—',
+    fresh: true
+  });
+
+  S.objects.unshift({
+    id: 'OBJ-' + (100 + S.nextTL),
+    sh: SV[S.svCat].label.charAt(0),
+    cat: S.svCat,
+    type: SV[S.svCat].label + ' · ' + name,
+    s: 'baru',
+    lat: -8.6750 + (Math.random() * 0.006 - 0.003),
+    lng: 115.2040 + (Math.random() * 0.006 - 0.003),
+    road: 'Jl. Teuku Umar Barat',
+    seg: 'U-07',
+    kec: 'Denpasar Barat',
+    team: 'Tim A',
+    time: 'Baru saja',
+    k1: SV[S.svCat].l[0][0],
+    v1: document.getElementById('sv1') ? document.getElementById('sv1').value : '-',
+    k2: SV[S.svCat].l[1][0],
+    v2: document.getElementById('sv2') ? document.getElementById('sv2').value : '-',
+    match: 'Menunggu verifikasi'
+  });
+
+  S.svSent++;
+  if (S.svDone < 9) S.svDone++;
+  S.tlSel = id;
+  toast(id + ' terkirim dan masuk antrean verifikasi Bapenda');
+  render();
+});
+
+document.getElementById('roleSel').addEventListener('change', e => {
+  const o = e.target.selectedOptions[0];
+  document.getElementById('avatar').textContent = o.value;
+  document.getElementById('roleName').textContent = o.textContent.split('(')[0].trim();
+  const home = { PM:'dashboard', VR:'penyisiran', PT:'survei', KP:'tindaklanjut', EK:'komoditas' }[o.value];
+  if (location.hash === '#' + home) go(home); else location.hash = home;
+});
+
+// Initialize theme
+applyTheme(currentThemeMode);
+
+// Initialize router
+fromHash();
+})();
+</script>
+
+</body>
+</html>
